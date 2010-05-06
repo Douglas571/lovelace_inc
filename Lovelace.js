@@ -5,6 +5,7 @@ var vhost 	= require('vhost');
 var router 	= require('./router.js');
 
 /*
+
 var app = express()
 			.set('port', process.env.PORT || 3000)
 			.set('view engine', 'pug')
