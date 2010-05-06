@@ -33,9 +33,14 @@ app.use(router.user);
 
 app.use('/data', function(req, res) {
 	console.log(`form: ${req.body.form}
-		nombre: ${req.body.nombre}
-		mensage: ${req.body.mensage}`);
-	res.redirect(303, '/');
+	nombre: ${req.body.nombre}
+	mensage: ${req.body.mensage}`);
+	if (req.xhr || req.accepts('json,html') === 'json') {
+		res.send({ success: true });
+	} else {
+		console.log('error');
+	}
+		
 });
 
 //set up the server
