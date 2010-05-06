@@ -26,13 +26,10 @@ app.set('view engine', 'hbs')
 	.set('views', `${__dirname}/views`);
 
 // Middlewar configs
+app.use(require('body-parser')());
 app.use(express.static(__dirname + "/public"));			
 app.use(vhost('admin.*', router.admin));
 app.use(router.user);
-
-app.use('/', function(req, res) {
-	res.render('home');
-});
 
 //set up the server
 app.set('port', process.env.PORT || 3000)
