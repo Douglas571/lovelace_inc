@@ -1,0 +1,70 @@
+mixin nav-link(text, url='#')
+	li 
+		a(href=url) #{text}
+
+mixin link(text, url='#')
+	a(href=url) #{text}
+
+doctype html
+
+html
+	head
+		meta(charset='utf-8')
+		title Lovelace ink.
+		link(rel='stylesheet' href='/css/bulma.css')
+
+	body
+		header
+			nav#menu
+				ul
+					+nav-link('Home', '/')
+					+nav-link('Servirces', '/services')
+					+nav-link('Portfolio', '/portfolio')
+					+nav-link('Contact', '/contact')
+					+nav-link('About', '/about')
+
+		section#about
+			h1 Lovelace Ink.
+			p We make software with Love
+			+link('Contact us :3', '/contact')
+
+		section#reasons
+			article
+				h2 We involve in proyects that improve the life and enjoy of others:
+				ul.columns
+					li.column
+						h3 Web Development and UX
+						p Make Web page and aplicaction that work on Internet, with a good UX allows peoples interact more closely activitly with you and other
+						+link('More', '/services#web-development-and-ux')
+
+					li.column
+						h3 Photography
+						p The imagens are powerfull and talk so much, a good imagen bring a wonderfull sens to peoples who see it
+						+link('More', '/services#Photography')
+					li.column
+						h3 Illustration
+						p The Illustrations are something personal, and an uncomparable way to conect with peoples, 
+						+link('More', '/services#Illustration')
+
+			article
+				h2 We develop for clientes who want bring the best for others:
+				ul
+					li
+						h3 Client
+						p Descripction of the client and proyect
+						+link('More', '/portfolio')
+					li
+						h3 Client 2
+						p Descripction of the client and proyect
+						+link('More', '/portfolio')
+					li
+						h3 Client 3
+						p Descripction of the client and proyect	
+						+link('More', '/portfolio')
+
+			article
+				h2 Well, why you waiten? Start to improve your life and the other too! :D
+				+link('Contact us', '/contact')
+
+		footer
+			p copyright 2020

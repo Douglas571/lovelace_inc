@@ -1,0 +1,48 @@
+* {
+  font-size: 10dpi;
+  font-family: arial;
+  font-weight: normal;
+  color: #333333;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+head {
+  display: none;
+}
+
+h1 {
+  font-size: 3em;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+li {
+  list-style: none;
+}
+
+section {
+  margin-bottom: 2em;
+  padding: 0 2em;
+}
+
+nav#menu {
+  text-align: center;
+}
+nav#menu ul {
+  background-color: #ff1aff;
+}
+nav#menu ul li {
+  padding: 2em;
+  display: inline-block;
+}
+
+/*# sourceMappingURL=main.css.map */

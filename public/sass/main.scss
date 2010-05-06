@@ -1,0 +1,59 @@
+$black: #333333;
+
+$phone-small:"min-width: 360px";
+$phone-big:"min-width: 500px";
+
+$mediun-screen:"min-width: 600px";
+$width-screen:"min-width: 1024px";
+
+* {
+	font-size: 10dpi;
+	font-family: arial;
+	font-weight: normal;
+
+	color: $black;
+
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+
+	text-decoration: none;
+
+}
+
+head {
+	display: none;
+}
+
+h1 {
+	font-size: 3em;
+}
+
+h2 {
+	font-size: 2em;
+}
+
+h3 {
+	font-size: 1.5em;
+}
+
+li {
+	list-style: none;
+}
+
+section {
+	margin-bottom: 2em;
+	padding: 0 2em;
+}
+
+nav#menu {
+	text-align: center;
+
+	ul {
+		background-color: lighten(purple, 30%);
+		li{
+			padding: 2em;
+			display: inline-block;
+		}
+	}
+}

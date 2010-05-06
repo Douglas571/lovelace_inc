@@ -1,0 +1,33 @@
+De qué tratará el blog:
+
+
+	porqué necesito un blog:
+		para publicar contenido sobre:
+			robotica
+			inteligencia artificial
+
+
+
+funciones:
+	iniciar seción
+	agregar, editar, eliminar un post
+	agregar una ruta
+
+
+dominio Principal
+	botland
+
+		/robotica
+
+		/ia
+
+		/sobre-Mi
+
+dominio del administrador
+	admin.
+		
+		/agregar
+
+		/editar
+
+		/eliminar
