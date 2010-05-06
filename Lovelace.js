@@ -31,6 +31,13 @@ app.use(express.static(__dirname + "/public"));
 app.use(vhost('admin.*', router.admin));
 app.use(router.user);
 
+app.use('/data', function(req, res) {
+	console.log(`form: ${req.body.form}
+		nombre: ${req.body.nombre}
+		mensage: ${req.body.mensage}`);
+	res.redirect(303, '/');
+});
+
 //set up the server
 app.set('port', process.env.PORT || 3000)
 app.listen(app.get('port'), function(){
