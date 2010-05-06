@@ -8,7 +8,14 @@ var router 	= require('./router.js');
 var handlebars = require ('express-handlebars');
 handlebars = handlebars.create({
 					defaultLayout: 'main',
-					extname: '.hbs'
+					extname: '.hbs',
+					helpers: {
+						section: function(name, options) {
+							if(!this._sections) this._sections = {};
+							this._sections[name] = options.fn(this);
+							return null;
+						}
+					}
 				});
 
 var app = express();

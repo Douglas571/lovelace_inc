@@ -1,1 +1,11 @@
-<h1>Hola {{ nombre }}</h1>
+{{#section 'head'}}
+	<link rel="stylesheet" type="text/css" href="css/bulma.min.css">
+{{/section}}
+
+<h1 class="title">Hola {{ nombre }}</h1>
+
+{{#section 'js'}}
+	<script type="text/javascript">
+		console.log('hola mundo, estoy al aire');
+	</script>
+{{/section}}
