@@ -6,19 +6,26 @@ var router 	= require('./router.js');
 
 
 var handlebars = require ('express-handlebars');
-handlebars.create({extname: '.hbs'});
+handlebars = handlebars.create({
+					defaultLayout: 'main',
+					extname: '.hbs'
+				});
 
 var app = express();
 
 //Engine configs
 app.engine('hbs', handlebars.engine);
-app.set('views', './views')
-	.set('view engine', 'hbs');
+app.set('view engine', 'hbs')
+	.set('views', `${__dirname}/views`);
 
 // Middlewar configs
 app.use(express.static(__dirname + "/public"));			
 app.use(vhost('admin.*', router.admin));
 app.use(router.user);
+
+app.use('/', function(req, res) {
+	res.render('home');
+});
 
 //set up the server
 app.set('port', process.env.PORT || 3000)

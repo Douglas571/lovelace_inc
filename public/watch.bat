@@ -1,1 +1,1 @@
-sass --watch "C:\Users\yaquelin ramirez\Documents\Proyectos\Lovelace\public\sass":"C:\Users\yaquelin ramirez\Documents\Proyectos\Lovelace\public\css"
+sass --watch "C:\Users\yaquelin ramirez\Documents\Proyectos\Lovelace\public" : "C:\Users\yaquelinramirez\Documents\Proyectos\Lovelace\public\css"
