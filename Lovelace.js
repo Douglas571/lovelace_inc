@@ -6,6 +6,8 @@ var router 	= require('./router.js');
 
 
 var handlebars = require ('express-handlebars');
+
+//Handlebars Configuration
 handlebars = handlebars.create({
 					defaultLayout: 'main',
 					extname: '.hbs',
@@ -32,14 +34,8 @@ app.use(vhost('admin.*', router.admin));
 app.use(router.user);
 
 app.use('/data', function(req, res) {
-	console.log(`form: ${req.body.form}
-	nombre: ${req.body.nombre}
-	mensage: ${req.body.mensage}`);
-	if (req.xhr || req.accepts('json,html') === 'json') {
-		res.send({ success: true });
-	} else {
-		console.log('error');
-	}
+	console.log(`form: ${req.body.form}\nnombre: ${req.body.nombre}\nmensage: ${req.body.mensage}`);
+	res.send('Gracias por escojernos, su solicitud será porcesada lo más pronto posible');
 		
 });
 
