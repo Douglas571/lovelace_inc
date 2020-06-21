@@ -35,6 +35,14 @@ app.use(router.user);
 
 app.use('/data', function(req, res) {
 	console.log(`form: ${req.body.form}\nnombre: ${req.body.nombre}\nmensage: ${req.body.mensage}`);
+
+	{
+		var s = '';
+		for (var name in req.headers)
+			s += `${name}: ${req.headers[name]}\n`;
+		console.log(s);
+	}
+	res.set('Content-Type', 'text/html');
 	res.send('Gracias por escojernos, su solicitud será porcesada lo más pronto posible');
 		
 });

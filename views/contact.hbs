@@ -2,7 +2,7 @@
 
 <form id="formulario" action="/data?form=contact" method="POST" role="form">
 	<input type="text" name="nombre" placeholder="¿Cómo te llamas?">
-	<textarea name="mensage" placeholder="¿Qué podemos hacer por ti?"></textarea>
+	<textarea name="mensage" placeholder="¿Qué podemos hacer por ti?">otro mnsage</textarea>
 	<button class="button is-primary" type="submit">Enviar</button>
 </form>
 
@@ -10,10 +10,16 @@
 	<script type="text/javascript">
 
 		var form = document.querySelector('#formulario');
+		var accion = form.getAttribute('action');
 		console.log('ejecutado');
 		console.log(form);
 		form.addEventListener('submit', function(e){
 				console.log('en el formulario');
+				var peticion = fetch(accion, {
+					method: 'POST',
+				});
+				peticion.then(res => res.text())
+						.then(text => form.innerHTML = `<h2>${text}</h2>`);
 				e.preventDefault();
 			}
 		);
