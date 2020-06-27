@@ -1,5 +1,6 @@
 'use strict';
 
+var http    = require('http');
 var express = require('express');
 var vhost 	= require('vhost');
 var router 	= require('./router.js');
@@ -49,7 +50,21 @@ app.use('/data', function(req, res) {
 
 //set up the server
 app.set('port', process.env.PORT || 3000)
-app.listen(app.get('port'), function(){
-	console.log(`Lovelace is launched in: ` + 
-				`http://localhost:${app.get('port')}`);
-});
+
+switch(app.get('env')){
+	case "production":
+		console.log('Production');
+		break;
+	case "development":
+		console.log('Development');
+		break;
+	default:
+		console.log('Unknow enviroment');
+}
+
+http.createServer(app)
+	.listen(app.get('port'), function(){
+		console.log('Lovelace is in "' + app.get('env') + 
+					'" mode and launched in: http://localhost:' + app.get('port') +
+					'; press Contrl + C to continue.');
+	});
