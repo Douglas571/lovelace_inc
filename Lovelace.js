@@ -6,6 +6,8 @@ var router 	= require('./router.js');
 
 
 var handlebars = require ('express-handlebars');
+
+//Handlebars Configuration
 handlebars = handlebars.create({
 					defaultLayout: 'main',
 					extname: '.hbs',
@@ -30,6 +32,20 @@ app.use(require('body-parser')());
 app.use(express.static(__dirname + "/public"));			
 app.use(vhost('admin.*', router.admin));
 app.use(router.user);
+
+app.use('/data', function(req, res) {
+	console.log(`form: ${req.body.form}\nnombre: ${req.body.nombre}\nmensage: ${req.body.mensage}`);
+
+	{
+		var s = '';
+		for (var name in req.headers)
+			s += `${name}: ${req.headers[name]}\n`;
+		console.log(s);
+	}
+	res.set('Content-Type', 'text/html');
+	res.send('Gracias por escojernos, su solicitud será porcesada lo más pronto posible');
+		
+});
 
 //set up the server
 app.set('port', process.env.PORT || 3000)
