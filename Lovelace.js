@@ -39,39 +39,40 @@ let opts = {
 mongoose.connect('mongodb://localhost/test', opts);
 let db = mongoose.connection;
 db.on('error',  console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-    console.log('estamos listos-.-----------');
-});
 
-let Persona = require('./models/Persona.js');
-Persona.find((err, personas) => {
-    if(personas.lenght) return;
+let BlogEntry = require('./models/blogEntry.js');
+BlogEntry.find((err, blogEntries) => {
+    if(blogEntries === []){
+        let entries = [];
+    
+        entries[0] = new BlogEntry({
+            date: "10-06-2020",
+            title: "Fist entry",
+            autor: "@DouglasSocorro",
+            description: "This is my first post of my personal Blog 'Lovelace inc'"
+        });
 
-    console.log('dentro de persona')
+        entries[1] = new BlogEntry({
+            date: "15-06-2020",
+            title: "Second entry",
+            autor: "@DouglasSocorro",
+            description: "this is my second entry of my personal blog :/"
+        });
 
-    new Persona({
-        nombre: 'Douglas',
-        edad: 18,
-        id: 29748656,
-        ciudad: 'Cumarebo',
-        trabaja: false
-    }).save();
+        entries[2] = new BlogEntry({
+            date: "20-06-2020",
+            title: "thirth entry",
+            autor: "@DouglasSocorro",
+            description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        });
 
-    new Persona({
-        nombre: 'Alirio',
-        edad: 56,
-        id: 7490919,
-        ciudad: 'Quebrada de Huten',
-        trabaja: true
-    }).save();
-
-    new Persona({
-        nombre: 'Yaquelin',
-        edad: 48,
-        id: 11479362,
-        ciudad: 'Valencia',
-        trabaja: true
-    }).save();
+        entries.forEach(function(ent){
+            ent.save((err, ent) => console.log(ent));
+        });
+    } else {
+        console.log("hay entradas");
+        return;
+    }
 });
 
 // Middlewar configs
@@ -79,20 +80,34 @@ app.use(require('body-parser')());
 app.use(express.static(__dirname + "/public"));         
 app.use(vhost('admin.*', router.admin));
 app.use(router.user);
-app.use('/personas', function(req, res) {
 
-    Persona.find({trabaja: true}, function(err, personas) {
-        let context = {
-            personas: personas.map((per) => {
+app.use('/blog/all', function(req, res) {
+    let context;
+    BlogEntry.find( function(err, blogEntries){
+        if(err)
+            console.log("no hay entradas");
+        
+        context = {
+            blogEntries: blogEntries.map((e) => {
                 return {
-                    nombre: per.nombre,
-                    edad: per.edad,
-                    id: per.id,
-                    ciudad: per.ciudad
+                    title: e.title,
+                    autor: e.autor,
+                    date: e.date,
+                    description: (e.description.slice(0, 45) + "...")
                 };
             })
         };
-        res.render('personas', context);
+
+        console.log("----------- encontrados -----------");
+        blogEntries.forEach(function(ent){
+            console.log(`${ent.date} : ${ent.title} - ${ent.autor}
+                ${ent.description}`);
+        });
+
+        console.log("----------- Contexto -----------");
+        console.log(context);
+
+        res.render('blogEntries', context);    
     });
 });
 

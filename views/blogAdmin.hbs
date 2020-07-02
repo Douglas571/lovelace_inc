@@ -1,0 +1,38 @@
+<h1>Create a new Blog Entry:</h1>
+<form id="formulario" action="/blogUpdate" method="POST">
+	<input type="text" name="title" placeholder="title"><br>
+	<input type="text" name="autor" placeholder="autor"><br>
+	<input type="text" name="date" placeholder="date"><br>
+	<textarea name="description" placeholder="What are you thing?"></textarea><br>
+	<button type="submit">Update Blog entry</button>
+</form>
+
+<script type="text/javascript">
+	let formulario = document.querySelector('#formulario');
+	formulario.addEventListener('submit', function(e){
+		let action = this.getAttribute('action');
+
+		let data = {
+			title: document.querySelector('[name="title"]').value,
+			autor: document.querySelector('[name="autor"]').value,
+			date: document.querySelector('[name="date"]').value,
+			description: document.querySelector('[name="description"]').value,
+		}
+
+		console.log(data);
+		console.log('--------------------');
+
+		console.log(JSON.stringify(data));
+
+
+
+		fetch( action, {
+			method:"POST",
+			headers: {
+				'content-type': 'application/json'
+			},
+			body: JSON.stringify(data)}
+		);
+		e.preventDefault();
+	});
+</script>

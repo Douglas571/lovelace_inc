@@ -13,7 +13,8 @@ userRoutes
    .get('/', main.home);
 
 adminRouts
-   .get('/', admin.home);
+   .get('/', admin.home)
+   .use('/blogUpdate', admin.blogUpdate);
 
 exports.user = userRoutes;
 exports.admin = adminRouts;
