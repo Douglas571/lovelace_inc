@@ -3,7 +3,7 @@
 var http    = require('http');
 var express = require('express');
 var vhost   = require('vhost');
-var router  = require('./router.js');
+var router  = require('./controller/router.js');
 
 var handlebars = require ('express-handlebars');
 
@@ -43,7 +43,6 @@ mongoose.connect('mongodb://localhost/test', opts);
 let db = mongoose.connection;
 db.on('error',  console.error.bind(console, 'connection error:'));
 db.once('open', function(){
-    console.log(db.getCollectionNames());
 });
 
 let BlogEntry = require('./models/blogEntry.js');

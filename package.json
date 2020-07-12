@@ -1,11 +1,14 @@
 {
-  "name": "mi_blog",
-  "version": "1.0.0",
-  "description": "mi primer blog",
-  "main": "Lovelace.js",
+  "name": "lovelace",
+  "version": "2.0.0",
+  "description": "Portfolio",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Douglas Socorro",
-  "license": "MIT",
+  "license": "MIT"
 }

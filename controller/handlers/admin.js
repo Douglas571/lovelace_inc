@@ -1,4 +1,4 @@
-let BlogEntry = require("./../models/blogEntry.js");
+let BlogEntry = require("./../../models/blogEntry.js");
 
 
 'use strict'
