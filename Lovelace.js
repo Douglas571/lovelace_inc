@@ -5,6 +5,9 @@ var vhost   = require('vhost');
 var router  = require('./router.js');
 
 var handlebars = require ('express-handlebars');
+
+var h = require('jest');
+console.log("ready");
 handlebars = handlebars.create({
                     defaultLayout: 'main',
                     extname: '.hbs',
@@ -39,6 +42,9 @@ let opts = {
 mongoose.connect('mongodb://localhost/test', opts);
 let db = mongoose.connection;
 db.on('error',  console.error.bind(console, 'connection error:'));
+db.once('open', function(){
+    console.log(db.getCollectionNames());
+});
 
 let BlogEntry = require('./models/blogEntry.js');
 BlogEntry.find((err, blogEntries) => {
@@ -107,7 +113,7 @@ app.use('/blog/all', function(req, res) {
         console.log("----------- Contexto -----------");
         console.log(context);
 
-        res.render('blogEntries', context);    
+        res.render('posts', context);    
     });
 });
 

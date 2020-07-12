@@ -1,0 +1,98 @@
+@import "default.css";
+@import "variables.css";
+@import "typography.css";
+
+body {
+	font-size: calc(16px + 0.5vw);
+	margin: 0;
+
+
+	background-color: var(--light-blue);
+}
+
+#nav-bar {
+	position: absolute;
+}
+
+
+/*=============================================*/
+
+.image-50px {
+	background: rgba(50, 50, 50, 0.1);
+	width: 50px;
+	height: 50px;
+	border-radius: 100px;
+}
+
+.image-150px {
+	background: rgba(50, 50, 50, 0.1);
+	width: 150px;
+	height: 150px;
+	border-radius: 100px;
+}
+
+/*================ contenedores ===================*/
+
+.container {
+	margin: 2rem;
+	padding: 2rem;
+
+	box-shadow: 5px 5px 15px -12px var(--shadow);
+}
+
+.contanier.centered {
+	display: block;
+	text-align: center;
+}
+
+.container > header {
+	margin-bottom: 1rem;
+}
+
+/*=============Blog entry========================*/
+
+.container-flex {
+	display: flex;
+	margin-bottom: 1rem;
+	flex-flow: row wrap;
+}
+
+#blog {
+	background: white;
+}
+
+.blog-entry{
+	flex: 250px;
+
+	transition: all ease .1s .0s;
+
+	margin: 1rem;
+	border-radius: 3px;
+	box-shadow: 5px 10px 15px -10px var(--shadow);
+
+	text-align: left;
+
+}
+
+.blog-entry-content {
+	padding: 1rem;
+}
+
+.blog-entry:hover {
+
+	box-shadow: -3px 8px 21px -9px var(--shadow);
+	transform: scale(1.09, 1.09);
+}
+
+.imagen-blog-entry {
+	background: var(--pink);
+	width: 100%;
+	height: 150px;
+}
+
+.container-isolate {
+	display: block;
+	text-align: center;
+
+	margin-bottom: 2rem;
+}

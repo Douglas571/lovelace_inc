@@ -1,0 +1,18 @@
+* {
+	margin: 0;
+	padding: 0;
+
+	box-sizing: border-box;
+	font-weight: normal;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:visited, a:link{
+	color: currentColor;
+}
+
+/*--------------- variables -----------------*/
+

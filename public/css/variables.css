@@ -1,0 +1,26 @@
+:root {
+	--normal-size: 16px;
+
+	--title-size: 4rem;
+	--sub-title-size: 3rem;
+	--delta-sub-title: .5rem;
+
+	--primary-font: "Arial", "times";
+	--secondary-font: "calibri", "Century Gothic";
+
+	--white: hsl(0, 0%, 97%);
+	--black: hsl(335, 10%, 15%);
+	--gray: hsl(0, 0%, 77%);
+
+	--shadow: #20212447;
+
+
+	--light-pink: hsla(335, 97%, 95%, 1);
+	--light-blue: hsla(199, 97%, 95%, 1);
+
+	--pink: hsla(335, 100%, 59%, 1);
+	--blue: hsla(199, 100%, 59%, 1);
+
+	--dark-pink: hsla(335, 100%, 39%, 1);
+	--dark-blue: hsla(199, 100%, 40%, 1);
+}
