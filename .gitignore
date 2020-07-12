@@ -1,6 +1,11 @@
 # ignore packages installed by npm
 node_modules/
 Brief_and_Designing/
+data/
+initdb.bat
+planificación.txt
+gulpfile.js
+
 *~
 .DS_Store
 

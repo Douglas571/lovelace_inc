@@ -1,0 +1,58 @@
+
+	<link rel="stylesheet" type="text/css" href="css/bulma.min.css">
+	<header id="page-header">
+		<h1 class="title-1">Yaquelin R.</h1>
+		<h2 class="sub-title-3">Manualidades, corte y confección</h2>
+
+		<a id="nav-display-button" href="">+</a>
+		<nav id="nav-bar">
+			<ul>
+				<li>Blog</li>
+				<li>Guias</li>
+				<li>Galería</li>
+				<li>Contactame</li>
+				<li>Acerca de Mí</li>
+			</ul>
+		</nav>
+	</header>
+
+	<main>
+		<section id="about">
+			<div class="image-150px">
+				<img src="">
+			</div>
+			<p>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			</p>
+		</section>
+
+		<section id="blog" class="container">
+			<header>
+				<h1>Guias y Tutoriales</h1>
+			</header>
+			<section id="blog-entries" class="container-flex">
+				{{#each blogEntries}}
+				{{> blog_entrie}}
+				{{/each}}
+			</section>
+			<div class="">
+				<a href="" class="button">Más Entradas</a>
+			</div>
+				
+		</section>
+
+		<section id="galery">
+			<h1>Galería</h1>
+			<a href="" class="button">Más Proyectos</a>
+		</section>
+
+		<section id="guide-and-tutorials">
+			<h1>Guias y tutoriales</h1>
+			<a href="" class="button">Más Proyectos</a>
+		</section>
+
+		<section id="contact">
+			<h1>Contactame</h1>
+		</section>
+	</main>
