@@ -3,23 +3,21 @@
 const express = require('express');
 const handlebarsWrapper = require('./handlebars.js');
 
-function engineConfig(app){
+function configViewEngine(app, dir){
 	app.engine('hbs', handlebarsWrapper.engine);
 	app.set('view engine', 'hbs')
-	    .set('views', '../views');
+	    .set('views', `${dir}/views`);
 	
 	return app;
 }
 
-module.exports = (name) => {
+module.exports = (name, dir) => {
 	let app = express(name);
 
-	app = engineConfig(app);
+	app = engineViewConfig(app, dir);
+
 	app.use(require('body-parser')());
-
-	console.log(__dirname);
-
-	app.use(express.static('../public'));  
+	app.use(express.static(`${dir}/public`));  
 
 	return app;
 }

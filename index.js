@@ -10,9 +10,10 @@ const handlebars = require('./controller/handlebars.js');
 const mongoose = require('./controller/mongoose.js');
 const express = require('./controller/express.js');
 
-var app = express('Lovelace inc.');
+let rootDir = __dirname;
+var app = express('Lovelace inc.', rootDir);
 
-// Middlewar configs       
+// Middlewar configs
 app.use(vhost('admin.*', router.admin));
 app.use(router.user);
 
@@ -57,4 +58,4 @@ http.createServer(app).listen(app.get('port'), function(){
 		console.log('Lovelace is in "' + app.get('env') + 
 					'" mode and launched in: http://localhost:' + app.get('port') +
 					'; press Contrl + C to continue.');
-	});
+});
