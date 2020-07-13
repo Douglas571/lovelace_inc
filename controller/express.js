@@ -14,7 +14,7 @@ function configViewEngine(app, dir){
 module.exports = (name, dir) => {
 	let app = express(name);
 
-	app = engineViewConfig(app, dir);
+	app = configViewEngine(app, dir);
 
 	app.use(require('body-parser')());
 	app.use(express.static(`${dir}/public`));  
