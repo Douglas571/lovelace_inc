@@ -1,26 +1,14 @@
 'use strict';
 
-var http    = require('http');
-var express = require('express');
-var vhost   = require('vhost');
-var router  = require('./controller/router.js');
+const http    = require('http');
+const express = require('express');
+const vhost   = require('vhost');
 
-var handlebars = require ('express-handlebars');
+const router  = require('./controller/router.js');
+const handlebars = require('./controller/handlebars.js');
 
-//Handlebars Configuration
-handlebars = handlebars.create({
-                    defaultLayout: 'main',
-                    extname: '.hbs',
-                    helpers: {
-                        section: function(name, options) {
-                            if(!this._sections) this._sections = {};
-                            this._sections[name] = options.fn(this);
-                            return null;
-                        }
-                    }
-                });
 
-var app = express();
+var app = express('Lovelace inc.');
 
 //Engine configs
 app.engine('hbs', handlebars.engine);
@@ -42,8 +30,6 @@ let opts = {
 mongoose.connect('mongodb://localhost/test', opts);
 let db = mongoose.connection;
 db.on('error',  console.error.bind(console, 'connection error:'));
-db.once('open', function(){
-});
 
 let BlogEntry = require('./models/blogEntry.js');
 BlogEntry.find((err, blogEntries) => {
