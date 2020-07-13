@@ -1,7 +1,6 @@
 'use strict';
 
 const http    = require('http');
-const express = require('express');
 const vhost   = require('vhost');
 
 const router  = require('./controller/router.js');
@@ -9,21 +8,11 @@ const router  = require('./controller/router.js');
 //Wrapper configuration...
 const handlebars = require('./controller/handlebars.js');
 const mongoose = require('./controller/mongoose.js');
+const express = require('./controller/express.js');
 
 var app = express('Lovelace inc.');
 
-//Engine configs
-app.engine('hbs', handlebars.engine);
-app.set('view engine', 'hbs')
-    .set('views', `${__dirname}/views`);
-
-//Data base configs
-
-
-
-// Middlewar configs
-app.use(require('body-parser')());
-app.use(express.static(__dirname + "/public"));         
+// Middlewar configs       
 app.use(vhost('admin.*', router.admin));
 app.use(router.user);
 
