@@ -1,4 +1,4 @@
-//TO-DO: Pass express to here.
+//TO-DO: Pass all configs  of express here.
 
 const express = require('express');
 const handlebarsWrapper = require('./handlebars.js');
