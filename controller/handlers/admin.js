@@ -1,13 +1,11 @@
 'use strict';
 
-let { writeFile , readFileSync} = require('fs');
-let BlogEntry = require("./../../models/blogEntry.js");
-
 exports.home = function(req, res){
 	res.send('Hello Admin!');
 }
 
 exports.blogUpdate = function(req, res){
+	const BlogEntry = require("./../../models/blogEntry.js");
 	switch(req.method){
 		case "GET":
 			console.log("GET");
@@ -36,24 +34,8 @@ exports.blogUpdate = function(req, res){
 	}	
 }
 
-function getNewContactInfo(req){
-	//TO-DO: Parse the contact info from request here.
-	console.log(req.headers['content-type'] + ":");
-	console.log(req.body);
-	return req.body;
-}
- 
-function setNewContactInfo(newContactInfo, callback){
-	newContactInfo = JSON.stringify(newContactInfo);
-	let content = readFileSync('./controller/handlers/contactInfo.json', 'utf-8');
-	console.log('old content is: \n' + content);
-	writeFile('./controller/handlers/contactInfo.json', newContactInfo, callback);
-
-}
-
 exports.contact = function(req, res){
-	//TO-DO: Make a function to obtanin the info from data base that 
-	//goes here
+	const contactInfo = require('../../models/contactInfo.js');
 
 	switch(req.method){
 		case 'GET':
@@ -61,16 +43,13 @@ exports.contact = function(req, res){
 			break;
 
 		case 'POST':
-			//TO-DO: Put function to edit contact info here.
-			let newContactInfo = getNewContactInfo(req);
-			setNewContactInfo(newContactInfo, (err) => {
+			let newContactInfo = req.body;
+			contactInfo.set(newContactInfo, (err) => {
 				if(err) {
 					console.warn(err);
 					res.send({success: false});
 				}
 
-				let content = readFileSync('./controller/handlers/contactInfo.json', 'utf-8');
-				console.log('new Content is: \n' + content);
 				res.set("content-type", "application/json");
 				res.send({success: true});
 			});
