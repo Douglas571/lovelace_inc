@@ -1,9 +1,19 @@
 <h1 class="title">Contact page</h1>
 
-<form id="formulario" action="/data?form=contact" method="POST" role="form">
-	<input type="text" name="nombre" placeholder="¿Cómo te llamas?">
-	<textarea name="mensage" placeholder="¿Qué podemos hacer por ti?">otro mnsage</textarea>
-	<button class="button is-primary" type="submit">Enviar</button>
+<h2>Contact Info</h2>
+<ul>
+	<li>Phone: {{ phone }}</li>
+	<li>E-mail: {{ email }}</li>
+	<li>Facebook: {{ facebook }}</li>
+</ul>
+
+<h2>Send us a message:</h2>
+<form id="formulario" action="/message" method="POST" role="form">
+	<input type="text" name="nombre" placeholder="How you called?">
+	<br>
+	<textarea name="mensage" placeholder="What you want?"></textarea>
+	<br>
+	<button class="button is-primary" type="submit">Send</button>
 </form>
 
 {{#section 'js'}}

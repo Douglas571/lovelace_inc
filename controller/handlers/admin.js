@@ -33,6 +33,11 @@ exports.blogUpdate = function(req, res){
 			break;
 		default:
 			console.log("Metodo desconocido");
-	}
-	
-} 
+	}	
+}
+
+exports.contact = function(req, res){
+	//TO-DO: Make a function to obtanin the info from data base that 
+	//goes here
+	res.render('adminContact', { phone: '0412-162-65-58' });
+}

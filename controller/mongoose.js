@@ -41,7 +41,6 @@ BlogEntry.find((err, blogEntries) => {
             ent.save((err, ent) => console.log(ent));
         });
     } else {
-        console.log("hay entradas");
         return;
     }
 });

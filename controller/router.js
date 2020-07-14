@@ -14,6 +14,7 @@ userRoutes
 
 adminRouts
    .get('/', admin.home)
+   .use('/contact', admin.contact)
    .use('/blogUpdate', admin.blogUpdate);
 
 exports.user = userRoutes;
