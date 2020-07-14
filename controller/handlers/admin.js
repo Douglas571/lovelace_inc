@@ -39,5 +39,12 @@ exports.blogUpdate = function(req, res){
 exports.contact = function(req, res){
 	//TO-DO: Make a function to obtanin the info from data base that 
 	//goes here
-	res.render('adminContact', { phone: '0412-162-65-58' });
+
+	switch(req.method){
+		case 'GET':
+			res.render('adminContact', { phone: '0412-162-65-58' });
+			break;
+		default:
+			res.send(`Method: ${req.method} not alowed or available.`);
+	}
 }
