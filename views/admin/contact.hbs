@@ -1,0 +1,24 @@
+<h1>Admin Contact Page</h1>
+
+<label for="phone">Phone</label>
+<input type="text" 
+		name="phone" 
+		placeholder="0000-000-00-00"
+		value="{{ phone }}"><br>
+
+<label for="email">E-mail:</label>
+<input type="text" 
+		name="email" 
+		placeholder="default@gmail.com" 
+		value="{{ email }}"><br>
+
+<label for="facebookUrl">Facebook acout:</label>
+<input type="text" 
+		name="facebookUrl" 
+		placeholder="Your link to facebook acount" 
+		value="{{ facebookUrl }}"><br>
+<button id="submit">send</button>
+
+{{#section 'js'}}
+	<script type="text/javascript" src="js/adminContact.js"></script>
+{{/section}}

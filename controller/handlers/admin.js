@@ -10,7 +10,7 @@ exports.blogUpdate = function(req, res){
 		case "GET":
 			console.log("GET");
 			console.log(req.url);
-			res.render('blogAdmin');
+			res.render('admin/blog');
 			break;
 
 		case "POST":
@@ -39,7 +39,8 @@ exports.contact = function(req, res){
 
 	switch(req.method){
 		case 'GET':
-			res.render('adminContact', { phone: '0412-162-65-58' });
+			let context = contactInfo.get();
+			res.render('admin/contact', context);
 			break;
 
 		case 'POST':
@@ -57,5 +58,7 @@ exports.contact = function(req, res){
 
 		default:
 			res.send(`Method: ${req.method} not alowed or available.`);
+			break;
+			
 	}
 }

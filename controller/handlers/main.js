@@ -1,23 +1,23 @@
 'use strict';
 
 exports.home = function(req, res){
-	res.render('home');
+	res.render('main/home');
 };
 
 exports.services = function(req, res){
-	res.render('services');
+	res.render('main/services');
 };
 
 exports.portfolio = function(req, res){
-	res.render('portfolio');
+	res.render('main/portfolio');
 };
 
 exports.contact = function(req, res){
 	const contactInfo = require('./../../models/contactInfo.js');
 	let context = contactInfo.get();
-	res.render('contact', context);
+	res.render('main/contact', context);
 };
 
 exports.about = function(req, res){
-	res.render('about');
+	res.render('main/about');
 }
