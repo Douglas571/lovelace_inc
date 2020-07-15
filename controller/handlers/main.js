@@ -14,8 +14,10 @@ exports.portfolio = function(req, res){
 
 exports.contact = function(req, res){
 	const contactInfo = require('./../../models/contactInfo.js');
-	let context = contactInfo.get();
-	res.render('main/contact', context);
+	contactInfo.get()
+		.then(context => {
+			res.render('main/contact', context);
+		});
 };
 
 exports.about = function(req, res){

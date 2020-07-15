@@ -39,21 +39,19 @@ exports.contact = function(req, res){
 
 	switch(req.method){
 		case 'GET':
-			let context = contactInfo.get();
-			res.render('admin/contact', context);
+			contactInfo.get()
+				.then(context => {
+					res.render('admin/contact', context);		
+				});
 			break;
 
 		case 'POST':
 			let newContactInfo = req.body;
-			contactInfo.set(newContactInfo, (err) => {
-				if(err) {
-					console.warn(err);
-					res.send({success: false});
-				}
-
-				res.set("content-type", "application/json");
-				res.send({success: true});
-			});
+			contactInfo.set(newContactInfo)
+				.then( value => {
+					res.set("content-type", "application/json");
+					res.send({success: value});
+				});
 			break;
 
 		default:
