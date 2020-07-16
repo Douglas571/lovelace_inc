@@ -19,5 +19,5 @@ exports.get = function(){
 			if(err)	reject(err);
 			resolve(JSON.parse(text));
 		});
-	});
+	})
 }

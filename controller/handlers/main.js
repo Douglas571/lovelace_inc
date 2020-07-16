@@ -12,12 +12,10 @@ exports.portfolio = function(req, res){
 	res.render('main/portfolio');
 };
 
-exports.contact = function(req, res){
+exports.contact = async function(req, res){
 	const contactInfo = require('./../../models/contactInfo.js');
-	contactInfo.get()
-		.then(context => {
-			res.render('main/contact', context);
-		});
+	const context = await contactInfo.get();
+	res.render('main/contact', context);
 };
 
 exports.about = function(req, res){
