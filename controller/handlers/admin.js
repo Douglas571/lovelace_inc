@@ -34,24 +34,20 @@ exports.blogUpdate = function(req, res){
 	}	
 }
 
-exports.contact = function(req, res){
+exports.contact = async function(req, res){
 	const contactInfo = require('../../models/contactInfo.js');
 
 	switch(req.method){
 		case 'GET':
-			contactInfo.get()
-				.then(context => {
-					res.render('admin/contact', context);		
-				});
+			let context = await contactInfo.get();
+			res.render('admin/contact', context);
 			break;
 
 		case 'POST':
 			let newContactInfo = req.body;
-			contactInfo.set(newContactInfo)
-				.then( value => {
-					res.set("content-type", "application/json");
-					res.send({success: value});
-				});
+			let result = await contactInfo.set(newContactInfo);
+			res.set("content-type", "application/json");
+			res.send(result);
 			break;
 
 		default:
