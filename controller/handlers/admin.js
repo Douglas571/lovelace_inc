@@ -1,7 +1,12 @@
 'use strict';
 
+function renderAdminView(res, path, context = {}){
+	context.layout = null;
+	res.render(path, context);
+}
+
 exports.home = function(req, res){
-	res.send('Hello Admin!');
+	renderAdminView(res, 'admin/home');	
 }
 
 exports.blogUpdate = function(req, res){
@@ -40,7 +45,7 @@ exports.contact = async function(req, res){
 	switch(req.method){
 		case 'GET':
 			let context = await contactInfo.get();
-			res.render('admin/contact', context);
+			renderAdminView(res, 'admin/contact', context);
 			break;
 
 		case 'POST':
