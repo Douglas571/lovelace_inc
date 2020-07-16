@@ -4,7 +4,7 @@ const path = {
 }
 
 exports.set = function(info){
-	return new Promise(resolve, reject => {
+	return new Promise((resolve, reject) => {
 		if (typeof info !== String) info = JSON.stringify(info);
 		writeFile(path.contactInfo, info, (err) => {
 			if (err) reject(err);
@@ -14,7 +14,7 @@ exports.set = function(info){
 }
 
 exports.get = function(){
-	return new Promise(resolve, reject => {
+	return new Promise((resolve, reject) => {
 		readFile(path.contactInfo, 'utf-8', (err, text) => {
 			if(err)	reject(err);
 			resolve(JSON.parse(text));
