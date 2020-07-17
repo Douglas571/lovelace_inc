@@ -1,12 +1,20 @@
 'use strict';
 
+const root = 'admin/';
+const path = {
+	home: 		root + 'home',
+	contact: 	root + 'contact',
+	blogUpdate: root + 'blog'
+
+}
+
 function renderAdminView(res, path, context = {}){
 	context.layout = null;
 	res.render(path, context);
 }
 
 exports.home = function(req, res){
-	renderAdminView(res, 'admin/home');	
+	renderAdminView(res, path.home);	
 }
 
 exports.blogUpdate = function(req, res){
@@ -15,7 +23,7 @@ exports.blogUpdate = function(req, res){
 		case "GET":
 			console.log("GET");
 			console.log(req.url);
-			res.render('admin/blog');
+			res.render(path.blog);
 			break;
 
 		case "POST":
@@ -45,7 +53,7 @@ exports.contact = async function(req, res){
 	switch(req.method){
 		case 'GET':
 			let context = await contactInfo.get();
-			renderAdminView(res, 'admin/contact', context);
+			renderAdminView(res, path.contact, context);
 			break;
 
 		case 'POST':
