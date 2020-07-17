@@ -9,7 +9,7 @@ const path = {
 }
 
 function renderAdminView(res, path, context = {}){
-	context.layout = null;
+	context.layout = 'admin';
 	res.render(path, context);
 }
 
