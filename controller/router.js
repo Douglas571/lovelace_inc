@@ -6,37 +6,27 @@ let main = require('./handlers/main.js');
 let userRoutes = require('express').Router();
 let adminRouts = require('express').Router();
 
-
 const navLinks = {
-	page: [
-			{
-				url: '/',
-				name: 'Home'
-			},
-			{
-				url: '/proyects',
-				name: 'Proyects'
-			},
-			{
-				url: '/services',
-				name: 'Services'
-			},
-			{
-				url: '/contact',
-				name: 'Contact'
-			},
-			{
-				url: '/about',
-				name: 'About'
-			}
-		]
+	home: 		'/',
+	services: 	'/services',
+	proyects: 	'/proyects',
+	contact: 	'/contact',
+	about: 		'/about'
+}
+
+function firstLetterUpperCase(text){
+	return text[0].toUpperCase() + text.slice(1);
 }
 
 function setNavLinks(req, res, next){
-	if(!res.locals.partials)
-		res.locals.partials = {};
+	let links = {page: []};
 
-	res.locals.partials.navLinks = navLinks;
+	for(let name in navLinks){
+		links.page.push({name: firstLetterUpperCase(name), 
+							url: navLinks[name]});
+	}
+
+	res.locals.navLinks = links;
 	next();
 }
 

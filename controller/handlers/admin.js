@@ -49,6 +49,8 @@ exports.blogUpdate = function(req, res){
 
 exports.contact = async function(req, res){
 	const contactInfo = require('../../models/contactInfo.js');
+	console.log('entra en contact');
+	console.log(req.method);
 
 	switch(req.method){
 		case 'GET':
@@ -58,6 +60,9 @@ exports.contact = async function(req, res){
 
 		case 'POST':
 			let newContactInfo = req.body;
+
+			console.log('constact post');
+			console.log(newContactInfo);
 			let result = await contactInfo.set(newContactInfo);
 			res.set("content-type", "application/json");
 			res.send(result);

@@ -4,6 +4,8 @@ let phone = document.querySelector('[name="phone"]');
 let email = document.querySelector('[name="email"]');
 let facebookUrl = document.querySelector('[name="facebookUrl"]');
 
+console.log('cargado');
+
 button.addEventListener('click', el => {
 	let newContactInfo = {
 		phone: phone.value,
@@ -12,8 +14,7 @@ button.addEventListener('click', el => {
 	}
 
 	console.log(JSON.stringify(newContactInfo));
-
-	let res = fetch('/contact', 
+	let res = fetch('/admin/contact', 
 		{
 			method: 'POST',
 			headers: {
