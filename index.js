@@ -14,7 +14,7 @@ let rootDir = __dirname;
 var app = express('Lovelace inc.', rootDir);
 
 // Middlewar configs
-app.use(vhost('admin.*', router.admin));
+app.use('/admin', router.admin);
 app.use(router.user);
 
 
