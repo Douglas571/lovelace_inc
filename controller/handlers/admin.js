@@ -8,8 +8,11 @@ const path = {
 
 }
 
+//because i'm happy, happy is the trut
+
 function renderAdminView(res, path, context = {}){
-	context.layout = null;
+	context.layout = 'main';
+	context.admin = true;
 	res.render(path, context);
 }
 
