@@ -17,29 +17,6 @@ var app = express('Lovelace inc.', rootDir);
 app.use('/admin', router.admin);
 app.use(router.user);
 
-
-let BlogEntry = require('./models/blogEntry.js');
-app.use('/blog/all', function(req, res) {
-    let context;
-    BlogEntry.find( function(err, blogEntries){
-        if(err)
-            console.log("no hay entradas");
-        
-        context = {
-            blogEntries: blogEntries.map((e) => {
-                return {
-                    title: e.title,
-                    autor: e.autor,
-                    date: e.date,
-                    description: (e.description.slice(0, 45) + "...")
-                };
-            })
-        };
-
-        res.render('posts', context);    
-    });
-});
-
 //set up the server
 app.set('port', process.env.PORT || 3000);
 

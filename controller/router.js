@@ -34,7 +34,8 @@ userRoutes
    .use(setNavLinks)
    .get('/about', main.about)
    .get('/contact', main.contact)
-   .get('/proyects', main.proyects)
+   .get('/portfolio', main.portfolio)
+   .get('/portfolio/:title', main.post)
    .get('/services', main.services)
    .get('/', main.home);
 
