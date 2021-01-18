@@ -1,4 +1,4 @@
-//TO-DO: put mongoose config here.
+
 const mongoose = require('mongoose');
 const opts = {
                 server: {

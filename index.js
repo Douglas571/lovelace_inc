@@ -1,21 +1,28 @@
-'use strict';
+"use strict";
 
 const http    = require('http');
 const vhost   = require('vhost');
 
-const router  = require('./controller/router.js');
-
 //Wrapper configuration...
-const handlebars = require('./controller/handlebars.js');
-const mongoose = require('./controller/mongoose.js');
-const express = require('./controller/express.js');
+const handlebars = require('./wrappers/handlebars.js');
+const mongoose = require('./wrappers/mongoose.js');
+const express = require('./wrappers/express.js');
 
 let rootDir = __dirname;
 var app = express('Lovelace inc.', rootDir);
 
 // Middlewar configs
-app.use('/admin', router.admin);
-app.use(router.user);
+app.use((req, res, next) => {
+	console.log(req.url + ': ' + req.method)
+	next()
+});
+
+const UserAuthSystem = require('./core/user-system.js')
+const uas = new UserAuthSystem();
+const ctrl  = require('./controller')(uas);
+
+app.use('/admin', ctrl.admin);
+app.use('/', ctrl.user);
 
 //set up the server
 app.set('port', process.env.PORT || 3000);

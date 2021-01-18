@@ -1,8 +1,10 @@
 let mongoose = require('mongoose');
 
 let userSchema = mongoose.Schema({
-	authId: Number,
+	id: String,
 	username: String,
+  password: String,
+  
 	name: String,
 	subname: String,
 	role: String,

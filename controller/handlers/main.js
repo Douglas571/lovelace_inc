@@ -9,7 +9,7 @@ const root = 'main/';
 const path = {
 	home: 		root + 'home',
 	services: 	root + 'services',
-	proyects: 	root + 'proyects',
+	portfolio: 	root + 'portfolio',
 	contact: 	root + 'contact',
 	about: 		root + 'about',
 
@@ -24,11 +24,15 @@ exports.services = function(req, res){
 	res.render(path.services);
 };
 
-const blogEntries = require('./../../models/blogEntry');
+const Article = require('./../../models/article');
+const viewModelArticle = require('./../../viewModel/article.js');
 exports.portfolio = async function(req, res){	
-	let entries = await blogEntries.find({});
+	const context = await viewModelArticle.getArticles();
+  
+  console.log(context);
+/*
 	let context = {
-		blogEntries: entries.map((entry) => {
+		blogEntries: Articles.map((entry) => {
 			return {
 				title: entry.title,
 				author: entry.author,
@@ -38,7 +42,7 @@ exports.portfolio = async function(req, res){
 			}
 		}),
 	};
-
+*/
 	res.render(path.portfolio, context);
 };
 
