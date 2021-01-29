@@ -1,5 +1,9 @@
 'use strict';
 
+
+const Article = require('./../../models/article');
+const viewModelArticle = require('./../../viewModel/article-view-model.js');
+
 /*
 	TO-DO: Thought in a way to reduce the duplicate name
 	for every route.
@@ -24,8 +28,6 @@ exports.services = function(req, res){
 	res.render(path.services);
 };
 
-const Article = require('./../../models/article');
-const viewModelArticle = require('./../../viewModel/article.js');
 exports.portfolio = async function(req, res){	
 	const context = await viewModelArticle.getArticles();
   

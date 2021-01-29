@@ -1,0 +1,45 @@
+type Query {
+  article(id: String): Article!
+  allArticles: [Article!]!
+}
+
+type Article {
+  id: String!
+  name: String!
+  price: Float!
+  isAvailable: Boolean!
+  byRequest: Boolean
+  stock: Int
+  photos: [Photo]
+  cover: String
+  urlOfCover: String
+  description: String
+}
+
+type Photo {
+  id: String!
+  url: String!
+}
+
+type Mutation {
+  createArticle(article: ArticleInput): Article!
+  addPhotosToArticle(id: String!, photos: [PhotoInput!]!): Article!
+
+  hello(who: String): String!
+}
+
+input ArticleInput {
+  name: String!
+  price: Float!
+  isAvailable: Boolean!
+  byRequest: Boolean
+  stock: Int!
+  photos: [PhotoInput]
+  cover: String
+  description: String
+}
+
+input PhotoInput {
+  id: String!
+  url: String!
+}

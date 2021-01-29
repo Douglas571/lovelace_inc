@@ -44,6 +44,14 @@
   let fileInput = document.getElementById('files')
   let previews = document.getElementById('previews')
 
+  let listOfFiles = []
+
+  function printAllFiles(files){
+    for(let file of files) {
+      console.log(`${files.indexOf(file)}. The file ${file.name} has a size of: ${file.size}`)
+    }
+  }
+
   fileInput.addEventListener('change', (evt) => {
     console.log(evt);
 
@@ -51,15 +59,33 @@
     
     const files = fileInput.files;
     for (let file of files) {
+      
+
+      // prueba
+      const newName = `${Date.now()}.${file.type.split('/')[1]}`
+      listOfFiles.push(createNewFile(file, newName))
+      // fin prueba
+
+    }
+
+    for(let file of listOfFiles) {
       const url = URL.createObjectURL(file)
       html += 
-      `<input type="radio" name="cover" value=${file.name}>
-      <img src="${url}" width="100" height="150">`
+      `<input type="radio" name="cover" value=${file.name} id="${file.name}">
+      <label for="${file.name}">
+        <img src="${url}" width="100" height="150">
+      </label>`
     }
+
+    printAllFiles(listOfFiles)
 
     previews.innerHTML = html
   })
 
+  function createNewFile(file, newName) {
+    return new File([file], newName, { type: file.type })
+  }
+  
   function hasFiles(fileInput) {
     return (fileInput.files.length > 0)
   }
@@ -67,23 +93,46 @@
   form.addEventListener('submit', (e) => {
     e.preventDefault()
     const form = new FormData(e.srcElement)
+    //form.append('photos', listOfFiles)
 
-    if (!hasFiles(fileInput)) {
-      alert('no hay archivos');
-      form.delete('photo');
+    form.delete('photos')
+    for(let file of listOfFiles) {
+      console.log(file.name)
+      form.append('photos', file)
     }
 
-    fetch('/admin/articulo', 
+    console.log(form.get('photos'))
+    console.log(listOfFiles)
+
+
+    form.delete('photo');
+
+    const query = `mutation loQueSea($name: String){ hello(who: $name) }`
+    const variables = {name: 'Douglas'}
+
+    let gql = JSON.stringify({ query, variables })
+    form.append('toGraphql', gql)
+
+    sendArticle(form)
+
+  });
+
+  ///admin/articulo
+  function sendArticle(form){
+    fetch('/upload', 
       {
         method: 'POST',
+        headers: {
+          accept: 'application/json'
+        },
         body: form
       }
     )
     .then((res) => res.json())
     .then((json) => 
       {
-        console.log<(JSON.stringify(json));
+        alert(JSON.stringify(json));
       }
     );
-  });
+  }
 </script>

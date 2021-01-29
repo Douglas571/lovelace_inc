@@ -9,6 +9,8 @@ const bodyParser    = require('body-parser');
 const cookieParser  = require('cookie-parser');
 const flash         = require('connect-flash');
 
+const cors = require('cors')
+
 const sessionConfig = {
   secret: 'secret key',
   resave: false,
@@ -32,12 +34,15 @@ module.exports = (name, dir) => {
 	app
 		.use(express.static(`${dir}/front-end/public`))
 		.use(session(sessionConfig))
+    .use(bodyParser.json())
 	  .use(bodyParser())
     .use(cookieParser())
 
     .use(passport.initialize())
     .use(passport.session())
-    .use(flash());  
+    .use(flash())
+    //Temporaly
+    .use(cors())
 
 	return app;
 }

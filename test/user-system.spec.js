@@ -1,4 +1,5 @@
 const { expect, assert } = require('chai')
+const client = require('mongodb').MongoClient
 
 describe('User Authentication System', function(){
 

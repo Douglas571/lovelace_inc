@@ -1,16 +1,41 @@
 module.exports = function(grunt) {
-  grunt.loadNpmTasks('grunt-contrib-jshint')
-  grunt.loadNpmTasks('grunt-cafe-mocha')
-
+  [
+    'grunt-cafe-mocha',
+    'grunt-eslint',
+    'grunt-nodemon',
+    'grunt-contrib-watch',
+    'grunt-concurrent'
+  ].forEach( task => grunt.loadNpmTasks(task) )
 
   grunt.initConfig({
-    jshint: {
-      app: ['index.js']
+    eslint: {
+      target: ['index.js', 'back-end/index.js']
     },
     cafemocha: {
       src: ['test/**/*.js']
+    },
+    watch: {
+      scripts: {
+        files: ['back-end/index.js'],
+        tasks: ['eslint'],
+        options: {
+          spawn: false,
+        },
+      },
+    },
+    nodemon: {
+      dev: {
+        script: 'index.js'
+      }
+    },
+    concurrent: {
+      tasks: ['watch', 'nodemon'],
+      options: {
+        logConcurrentOutput: true
+      } 
     }
   })
 
-  grunt.registerTask('default', ['cafemocha'])
+  grunt.registerTask('default', ['watch'])
+  grunt.registerTask('dev', ['concurrent'])
 }

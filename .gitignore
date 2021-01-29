@@ -1,13 +1,16 @@
 # ignore packages installed by npm
-node_modules/
-Brief_and_Designing/
 data/
-initdb.bat
-planificación.txt
-gulpfile.js
+node_modules/
+
+test/resources/
+front-end/public/img/art/
+
+#front-end/react-app/
+front-end/react-app/node_modules
+front-end/react-app/build
+
+idb.bat
+stw.bat
 
 *~
 .DS_Store
-
-# put any other files you don't want to check in here,
-# such as .DS_Store (OSX), *.bak, etc.

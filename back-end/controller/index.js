@@ -1,6 +1,7 @@
 'use strict';
 
 let adminHandler = require('./handlers/admin.js');
+let articlesHandler = require('./handlers/admin/articles-handler');
 let main = require('./handlers/main.js');
 
 let userRoutes = require('express').Router();
@@ -34,10 +35,17 @@ function setNavLinks(req, res, next){
 
 
 module.exports = function(userSystem) {
+
   adminRoutes
     .route('/articulo')
-      .get(adminHandler.newArticle)
+      .get(adminHandler.viewAllArticles)
       .post(adminHandler.createArticle);
+
+  adminRoutes
+    .route('/articulo/:id')
+      .get(adminHandler.viewArticle)
+      .post(adminHandler.updateArticle)
+      .delete(adminHandler.deleteArticle);
 
   // STOP
   userRoutes
@@ -78,5 +86,11 @@ module.exports = function(userSystem) {
    const admin = adminRoutes;
    const user = userRoutes;
 
-   return { admin, user , security }
+   return { 
+     admin, 
+     user , 
+     security, 
+     fileUpload: adminHandler.handleFileUpload }
 }
+
+exports.fileUpload = adminHandler.handleFileUpload

@@ -1,0 +1,62 @@
+<div>
+  <h1>Edita este articulo: <strong id="articleId">{{ article.id }}</strong></h1>
+  <form id="newArticle">
+    <label>Nombre</label>
+    <input type="field" name="name" value="{{ article.name }}">
+    </br>
+    <label>Precio</label>
+    <input type="field" name="price" value="{{ article.price }}">
+    </br>
+    <label>En Venta</label>
+    <input type="field" name="stock" value="{{ article.stock }}">
+    </br>
+    <label>Foto</label>
+    <input type="file" id="files" multiple="true" name="photo">
+    </br>
+    <div id="previews">
+      {{#each article.photo}}
+        <input type="radio" name="cover" value="{{ name }}"
+        {{#if isCover}}
+          checked
+        {{/if}}
+        id="{{ name }}">
+        <label for="{{ name }}">
+          <img src="{{ url }}" width="100" height="150">  
+        </label>
+      {{/each}}
+    </div>
+    <div>
+      <label>Disponible</label>
+      <input type="checkbox" name="available" >
+    </div>
+    <input type="submit" name="send">
+  </form>
+</div>
+
+<script type="text/javascript">
+
+  let article = {};
+  let query = 'query { allArticles { id name } }'
+
+  fetch('/query', { 
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+      'accept': 'application/json'
+    },
+    body: JSON.stringify({ query })
+  })
+  .then(res => res.json())
+  .then(json => {
+    alert(JSON.stringify(json))
+  });
+  
+
+  function parseForm() {
+
+  }
+
+  function sendForm(formData) {
+
+  }
+</script>
