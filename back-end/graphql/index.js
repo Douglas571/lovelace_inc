@@ -20,10 +20,10 @@ class Article {
  
 const typeDefs = require('./type-defs')
 const resolvers = require('./resolvers')
-console.log(resolvers)
 const schema = makeExecutableSchema({ typeDefs, resolvers })
 
 module.exports = graphqlHTTP(({ user, body }) => {
+  console.log(body);
   return {
     schema,
     context: {

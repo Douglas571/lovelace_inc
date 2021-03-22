@@ -5,12 +5,21 @@ module.exports = {
     console.log('crating article...')
     article.id = article.id || Date.now()
     
-    const newArticle = await mongooseArticle.create(article);
+    const newArticle = await mongooseArticle.create(article)
 
     console.log(JSON.stringify(newArticle))
 
     return newArticle
   },
+
+  updateArticle: async (_, { article }) => {
+    
+    const result = await mongooseArticle.updateOne({ id: article.id }, { $set: article })
+    const articleToReturn = await mongooseArticle.findOne({ id: article.id })
+
+    return articleToReturn
+  },
+
   addPhotosToArticle: async (_, { id, photos }) => {
     await mongooseArticle.update(
       { id }, 

@@ -10,6 +10,14 @@ const expect = chai.expect
 const HOST = 'http://localhost:4000'
 const QUERY_POINT = '/query'
 
+async function fetchGql(body) {
+  return await chai.request(HOST)
+    .post('/query')
+    .set('Content-Type','application/json')
+    .set('Accept', 'application/json')
+    .send(body)
+}
+
 describe('graphql API', async () => {
 
   function byPrice(a, b) {
@@ -164,38 +172,35 @@ describe('graphql API', async () => {
       .post('/upload')
       //.type('form')
       .attach('photos', 
-        fs.readFileSync(path.join(__dirname, '1000.jpeg')), '1000.jpeg')
+        fs.readFileSync(path.join(__dirname, 'resources/1000.jpeg')), '1000.jpeg')
       .attach('photos', 
-        fs.readFileSync(path.join(__dirname, '2000.jpeg')), '2000.jpeg')
+        fs.readFileSync(path.join(__dirname, 'resources/2000.jpeg')), '2000.jpeg')
 
     const data = res.body
 
     expect(data).to.be.deep.equal(expectedData)
-
-    const MongoClient = require('mongodb').MongoClient;
   }) 
 
 
-  async function sendArticle(article) {
-    await chai.request(HOST)
-      .post('/query')
-      .set('Content-Type','application/json')
-      .set('Accept', 'application/json')
-      .send(
-        {
-          variables: {
-            article
-          },
-          query: `mutation creatingArticle($article: ArticleInput) {
-            createArticle(article: $article) {
-              id
-              name
-              price
-              isAvailable
-              stock
-            }
-          }`
-        })  
+  async function sendArticle(article) {    
+    const res = await fetchGql(
+      {
+        variables: {
+          article
+        },
+        query: `mutation creatingArticle($article: ArticleInput) {
+          createArticle(article: $article) {
+            id
+            name
+            price
+            isAvailable
+            stock
+          }
+        }`
+      }
+    )
+
+    return res.body.data.createArticle.id;
   }
 
   it('Should return an array of articles presaved', async () => {
@@ -242,6 +247,100 @@ describe('graphql API', async () => {
     expect(allArticles).to.be.an('array')
     expect(allArticles[0]).to.deep.include(articles[0])
     expect(allArticles[1]).to.deep.include(articles[1])
+  })
+
+  it('Should return the updated article', async () => {
+    const data = {
+      name: 'Calcetines',
+      description: 'Calcetines de rayas azules y negras',
+      price: 500,
+      isAvailable: true,
+      byRequest: true,
+      stock: 10,
+      photos: [
+        {
+          id: '12345',
+          url: '/12345.png'
+        }
+      ],
+      cover: '12345'
+    }
+
+    const articleId = await sendArticle(data)
+
+    const expectedData = {
+      id: articleId,
+      name: 'Medias',
+      description: 'Medias de rayas azules y negras',
+      price: 200,
+      isAvailable: true,
+      byRequest: false,
+      stock: 100,
+      photos: [
+        {
+          id: '12345',
+          url: '/12345.png'
+        },
+        {
+          id: '39999',
+          url: '39999.jpeg'
+        }
+      ],
+      cover: '39999'
+    }
+
+    await fetchGql(
+      {
+        variables: {
+          article: expectedData
+        },
+        query: 
+          `mutation updatingArticle($article: ArticleUpdateInput) {
+            updateArticle(article: $article) {
+              id
+              name
+              description
+              price
+              isAvailable
+              byRequest
+              stock
+              photos {
+                id
+                url
+              }
+              cover
+            }
+          }`
+      }
+    )
+
+    const res = await fetchGql({
+      variables: {
+        id: articleId
+      },
+      query: 
+      `
+        query findArticle($id: String) {
+          article(id: $id) {
+            id
+            name
+            description
+            price
+            isAvailable
+            byRequest
+            stock
+            photos {
+              id
+              url
+            }
+            cover
+          }
+        }
+      `
+    })
+
+    const result = res.body.data.article;
+    expect(result).to.deep.include(expectedData)
   })
   
   beforeEach((done) => {

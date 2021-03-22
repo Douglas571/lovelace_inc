@@ -9,7 +9,7 @@ exports.upload = async function (req, res, next) {
   const form = formidable(
     {
       multiples: true,
-      uploadDir: pathUtil.join(__dirname, './../../../../data/temp'),
+      uploadDir: pathUtil.join(__dirname, './../../../../../data/temp'),
       keepExtensions: true
     }
   )

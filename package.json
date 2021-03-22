@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "mocha --recursive",
+    "test-api": "mocha --recursive test/gql-api.spec.js --timeout=1000000",
     "start": "node index.js",
     "mon": "nodemon index.js dev --ignore test/",
     "mon-test": "nodemon index.js test --ignore test/",

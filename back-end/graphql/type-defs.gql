@@ -23,6 +23,8 @@ type Photo {
 
 type Mutation {
   createArticle(article: ArticleInput): Article!
+  updateArticle(article: ArticleUpdateInput): Article!
+
   addPhotosToArticle(id: String!, photos: [PhotoInput!]!): Article!
 
   hello(who: String): String!
@@ -33,7 +35,19 @@ input ArticleInput {
   price: Float!
   isAvailable: Boolean!
   byRequest: Boolean
-  stock: Int!
+  stock: Int
+  photos: [PhotoInput]
+  cover: String
+  description: String
+}
+
+input ArticleUpdateInput {
+  id: String
+  name: String
+  price: Float
+  isAvailable: Boolean
+  byRequest: Boolean
+  stock: Int
   photos: [PhotoInput]
   cover: String
   description: String
