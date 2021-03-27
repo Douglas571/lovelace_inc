@@ -1,15 +1,15 @@
 type Query {
-  article(id: String): Article!
+  article(id: String): Article
   allArticles: [Article!]!
 }
 
 type Article {
   id: String!
   name: String!
-  price: Float!
   isAvailable: Boolean!
-  byRequest: Boolean
+  price: Float
   stock: Int
+  byRequest: Boolean
   photos: [Photo]
   cover: String
   urlOfCover: String
@@ -24,6 +24,7 @@ type Photo {
 type Mutation {
   createArticle(article: ArticleInput): Article!
   updateArticle(article: ArticleUpdateInput): Article!
+  deleteArticle(id: String): Article!
 
   addPhotosToArticle(id: String!, photos: [PhotoInput!]!): Article!
 
@@ -32,8 +33,8 @@ type Mutation {
 
 input ArticleInput {
   name: String!
-  price: Float!
   isAvailable: Boolean!
+  price: Float!
   byRequest: Boolean
   stock: Int
   photos: [PhotoInput]

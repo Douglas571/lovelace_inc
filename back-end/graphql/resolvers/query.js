@@ -2,7 +2,8 @@ const mongooseArticle = require('./../../models/article');
 
 const Query = {
   article: async (_, { id }, contex) => {
-    return await mongooseArticle.findOne({ id })
+    const article = await mongooseArticle.findOne({ id })
+    return article
   },
   allArticles: async () => {
     return await mongooseArticle.find({})

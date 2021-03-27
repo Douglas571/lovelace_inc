@@ -86,7 +86,7 @@ describe('graphql API', async () => {
       photos: [
         {
           id: '12345',
-          url: '/12345.png'
+          url: 'http://localhost:4000/12345.png'
         }
       ],
       cover: '12345'
@@ -141,7 +141,7 @@ describe('graphql API', async () => {
     const expectedData = [
       {
         id: '1000',
-        url: '/img/art/1000.jpeg'
+        url: 'http://localhost:4000/img/art/1000.jpeg'
       }
     ]
 
@@ -160,11 +160,11 @@ describe('graphql API', async () => {
     const expectedData = [
       {
         id: '1000',
-        url: '/img/art/1000.jpeg'
+        url: 'http://localhost:4000/img/art/1000.jpeg'
       },
       {
         id: '2000',
-        url: '/img/art/2000.jpeg'
+        url: 'http://localhost:4000/img/art/2000.jpeg'
       }
     ]
 
@@ -261,6 +261,10 @@ describe('graphql API', async () => {
         {
           id: '12345',
           url: '/12345.png'
+        },
+        {
+          id: '78787',
+          url: '/78787.png'
         }
       ],
       cover: '12345'
@@ -283,7 +287,7 @@ describe('graphql API', async () => {
         },
         {
           id: '39999',
-          url: '39999.jpeg'
+          url: '/39999.jpeg'
         }
       ],
       cover: '39999'
@@ -340,9 +344,65 @@ describe('graphql API', async () => {
     })
 
     const result = res.body.data.article;
-    expect(result).to.deep.include(expectedData)
+    //console.log(result)
+    expect(result).to.deep.equal(expectedData)
   })
   
+  it('Should delete the product that match the id passed', async () => {
+    const data = {
+      name: 'to delete',
+      description: 'Calcetines de rayas azules y negras',
+      price: 500,
+      isAvailable: true,
+      byRequest: true,
+      stock: 10,
+      photos: [
+        {
+          id: '12345',
+          url: '/12345.png'
+        }
+      ],
+      cover: '12345'
+    }
+
+    const articleId = await sendArticle(data)
+
+    const deletedRes = await fetchGql({
+      variables: {
+        id: articleId
+      },
+      query: `
+        mutation deletingArticle($id: String) {
+          deleteArticle(id: $id) {
+            id
+            name
+            description
+            stock
+          }
+        }
+      `
+    })
+
+    expect(deletedRes.body.data.deleteArticle.id).to.be.equal(articleId)
+    expect(deletedRes.body.data.deleteArticle.name).to.be.equal(data.name)
+
+    const queryRes = await fetchGql({
+      variables: {
+        id: articleId
+      },
+      query: 
+      `
+        query findingArticle($id: String) {
+          article(id: $id) {
+            id
+          }
+        }
+      `
+    })
+
+    expect(queryRes.body.data.article).to.be.equal(null)
+
+  })
   beforeEach((done) => {
     const MongoClient = require('mongodb').MongoClient;
       

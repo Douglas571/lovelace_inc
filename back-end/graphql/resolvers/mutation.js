@@ -3,7 +3,10 @@ const mongooseArticle = require('./../../models/article');
 module.exports = {
   createArticle: async (_, { article }) => {
     console.log('crating article...')
-    article.id = article.id || Date.now()
+    article.id = Math.ceil(Math.random()*1000000000)
+    /*article.photos.forEach( photo => {
+      photo.url = 'http://localhost:4000' + photo.url
+    })*/
     
     const newArticle = await mongooseArticle.create(article)
 
@@ -18,6 +21,16 @@ module.exports = {
     const articleToReturn = await mongooseArticle.findOne({ id: article.id })
 
     return articleToReturn
+  },
+
+  deleteArticle: async (_, { id }) => {
+    const articleToDelete = await mongooseArticle.findOne({ id })
+    const result = await mongooseArticle.deleteOne({ id })
+    console.log('Delete article')
+    console.log(articleToDelete)
+    console.log(result)
+
+    return articleToDelete
   },
 
   addPhotosToArticle: async (_, { id, photos }) => {

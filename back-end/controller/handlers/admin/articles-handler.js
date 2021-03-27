@@ -46,11 +46,12 @@ exports.upload = async function (req, res, next) {
   })
 }
 
+const HOST = 'http://localhost:4000'
 async function processFileUpload({ photos }) {
   const rootFolder = pathUtil.join(__dirname, '../../../../front-end/public')
   const imgFolder = rootFolder + '/img'
   const artFolder = imgFolder + '/art'
-  const webArtFolder = '/img/art'
+  const webArtFolder = HOST + '/img/art'
 
   const listOfPhotos = []
 
