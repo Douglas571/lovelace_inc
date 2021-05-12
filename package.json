@@ -25,7 +25,7 @@
     "graphql": "^15.4.0",
     "graphql-playground-middleware-express": "^1.7.22",
     "graphql-tools": "^7.0.2",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "puppeteer-core": "^5.5.0"
